@@ -24,7 +24,6 @@ export default function Modal({ isOpen, onClose, onSubmit }: ModalProps) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    console.log(e.key);
     if (e.key === "Escape") {
       onClose();
     }
