@@ -1,13 +1,7 @@
 import { createContext, useContext, useState, type ReactNode, useRef } from "react";
 
 import Modal from "../components/Modal";
-
-export interface FormData {
-  name: string;
-  email: string;
-  position: string;
-  github?: string;
-}
+import type { FormData } from "../schemas/formSchema";
 
 interface ModalContextType {
   openFormModal: () => Promise<FormData | null>;
@@ -54,19 +48,9 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     queueMicrotask(restoreFocus);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
-
-    const result: FormData = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      position: formData.get("position") as string,
-      github: (formData.get("github") as string) || undefined,
-    };
-
+  const handleSubmit = (data: FormData) => {
     if (modalState.resolve) {
-      modalState.resolve(result);
+      modalState.resolve(data);
     }
     setModalState({ isOpen: false, resolve: null });
     queueMicrotask(restoreFocus);

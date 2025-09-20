@@ -199,6 +199,54 @@
   }
 }
 
+/* 오류 메시지 스타일 */
+.error-message {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.form-input.error,
+.form-select.error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.form-input.error:focus,
+.form-select.error:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+}
+
+/* 스크린리더 전용 텍스트 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 버튼 비활성화 상태 */
+.btn-cancel:disabled,
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-submit:disabled:hover {
+  background: #0064ff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transform: none;
+}
+
 /* 접근성 개선 */
 @media (prefers-reduced-motion: reduce) {
   .modal-content {
