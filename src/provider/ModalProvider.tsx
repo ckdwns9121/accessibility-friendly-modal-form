@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode, useRef } from "react";
 
 import Modal from "../components/Modal";
 
@@ -26,7 +26,11 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     resolve: null,
   });
 
+  const prevActiveElementRef = useRef<HTMLElement | null>(null);
+
   const openFormModal = (): Promise<FormData | null> => {
+    prevActiveElementRef.current = document.activeElement as HTMLElement;
+
     return new Promise((resolve) => {
       setModalState({
         isOpen: true,
@@ -35,11 +39,19 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const restoreFocus = () => {
+    if (prevActiveElementRef.current) {
+      prevActiveElementRef.current.focus();
+    }
+  };
+
   const handleClose = () => {
     if (modalState.resolve) {
       modalState.resolve(null);
     }
     setModalState({ isOpen: false, resolve: null });
+
+    queueMicrotask(restoreFocus);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -57,6 +69,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
       modalState.resolve(result);
     }
     setModalState({ isOpen: false, resolve: null });
+    queueMicrotask(restoreFocus);
   };
 
   return (
