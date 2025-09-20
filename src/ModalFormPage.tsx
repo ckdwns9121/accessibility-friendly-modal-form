@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useModal } from "./provider/ModalProvider";
+import "./modalFormPage.css";
 
 const ModalFormPage = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
