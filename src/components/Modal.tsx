@@ -93,7 +93,7 @@ export default function Modal({ isOpen, onClose, onSubmit }: ModalProps) {
             신청 폼
           </h2>
           <p id={modalDescriptionId} className="modal-subtitle">
-            아래 정보를 입력해주세요. 모든 필드는 필수 입력사항입니다.
+            이메일과 FE 경력 연차 등 간단한 정보를 입력해주세요.
           </p>
         </div>
 
@@ -200,7 +200,7 @@ export default function Modal({ isOpen, onClose, onSubmit }: ModalProps) {
               disabled={isSubmitting}
               aria-describedby={Object.keys(errors).length > 0 ? errorMessageId : undefined}
             >
-              {isSubmitting ? "제출 중..." : "신청하기"}
+              {isSubmitting ? "제출 중..." : "제출하기"}
             </button>
           </div>
         </form>
